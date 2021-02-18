@@ -22,8 +22,19 @@ class nechetkoe():
     def obrez_y(self, x, maxy):
         return min(self.find_y(x), maxy)
 
-
-test = nechetkoe(2, 4, 6, 8)
-print(test.find_y(6.5))
-test.obrez_y(5, 0.5)
-print(test)
+    def peresech(self, second):
+        if self.a > second.a:
+            first = second
+            second = self
+        else:
+            first = self
+        if first.c >= second.b:
+            return 1
+        elif first.d <= second.a:
+            return 0
+        k1 = 1 / (first.c - second.d)
+        z1 = 1 - k1 * first.c
+        k2 = 1 / (second.b - second.a)
+        z2 = 1 - k2 * second.b
+        x = (z2 - z1) / (k1 - k2)
+        return first.find_y(x)
