@@ -1,3 +1,4 @@
+import plotly.express as px
 class nechetkoe():
     def __init__(self, a, b, c, d, maxy=1):
         self.a = a
@@ -23,4 +24,32 @@ class nechetkoe():
         return min(self.find_y(x), maxy)
 
     def peresech(self, second):
-        pass
+        maxperesech = 0
+        step = 0.01
+        start = min(self.a, second.a)
+        end = min(self.d, second.d)
+        while start <= end:
+            y1 = self.find_y(start)
+            y2 = second.find_y(start)
+            if abs(y1 - y2) <= 0.01 and y1 != 0 and y2 != 0:
+                maxperesech = y1
+                if y1 == 1:
+                    return 1
+            start += step
+        return maxperesech
+
+
+rules = [[nechetkoe(1, 2, 3, 4), nechetkoe(5, 6, 7, 8)], [nechetkoe(5, 6, 7, 8), nechetkoe(10, 11, 12, 13)]]
+situation = nechetkoe(2,3,4,7)
+x =[]
+result = []
+step = 0.01
+start = 0
+end = 20
+while start <= end:
+    x.append(start)
+    result.append(max([i[1].obrez_y(start, i[0].peresech(situation)) for i in rules]))
+    start += step
+fig = px.scatter(x=x, y=result)
+fig.show()
+
