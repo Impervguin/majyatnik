@@ -1,8 +1,5 @@
-import plotly
-step = 0.1
-j = 0
-for i in range(1000):
-
-fig = px.scatter(x=x, y=y)
-fig.show()
-
+lst = [1, 2]
+other = lst
+other = other.copy()
+other[1] = 0
+print(other, lst, sep="\n")

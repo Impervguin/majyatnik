@@ -1,4 +1,6 @@
 import plotly.express as px
+
+
 class nechetkoe():
     def __init__(self, a, b, c, d, maxy=1):
         self.a = a
@@ -38,18 +40,30 @@ class nechetkoe():
             start += step
         return maxperesech
 
+    def combine_rules(self, rules, step):
+        x = []
+        result = []
+        start = 0
+        end = max(rules, key=lambda f: f[1].d)[1].d + 2
+        while start <= end:
+            x.append(start)
+            result.append(max([i[1].obrez_y(start, i[0].peresech(situation)) for i in rules]))
+            start += step
+        return x, result
+
+    @staticmethod
+    def mass_center(x, y, step):
+        s1 = 0
+        s2 = 0
+        for i in range(len(x)):
+            s1 += x[i] * y[i] * step
+            s2 += y[i] * step
+        return s1 / s2
+
 
 rules = [[nechetkoe(1, 2, 3, 4), nechetkoe(5, 6, 7, 8)], [nechetkoe(5, 6, 7, 8), nechetkoe(10, 11, 12, 13)]]
-situation = nechetkoe(2,3,4,7)
-x =[]
-result = []
-step = 0.01
-start = 0
-end = 20
-while start <= end:
-    x.append(start)
-    result.append(max([i[1].obrez_y(start, i[0].peresech(situation)) for i in rules]))
-    start += step
-fig = px.scatter(x=x, y=result)
+situation = nechetkoe(2, 3, 4, 7)
+x, y = situation.combine_rules(rules, 0.05)
+fig = px.scatter(x=x, y=y)
 fig.show()
-
+print(situation.mass_center(x, y, 0.05))
