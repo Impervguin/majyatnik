@@ -1,20 +1,17 @@
 import plotly.express as px
-
-
 class nechetkoe():
-    def __init__(self, a, b, c, d, maxy=1):
+    def __init__(self, a, b, c, d):
         self.a = a
         self.b = b
         self.c = c
         self.d = d
-        self.maxy = maxy
 
     def __str__(self):
-        return " ".join([str(i) for i in [self.a, self.b, self.c, self.d, self.maxy]])
+        return " ".join([str(i) for i in [self.a, self.b, self.c, self.d]])
 
     def find_y(self, x):
         if self.b <= x <= self.c:
-            return self.maxy
+            return 1
         elif x >= self.d or x <= self.a:
             return 0
         elif self.a <= x <= self.b:
@@ -47,7 +44,7 @@ class nechetkoe():
         end = max(rules, key=lambda f: f[1].d)[1].d + 2
         while start <= end:
             x.append(start)
-            result.append(max([i[1].obrez_y(start, i[0].peresech(situation)) for i in rules]))
+            result.append(max([i[1].obrez_y(start, i[0].peresech(self)) for i in rules]))
             start += step
         return x, result
 
@@ -61,9 +58,3 @@ class nechetkoe():
         return s1 / s2
 
 
-rules = [[nechetkoe(1, 2, 3, 4), nechetkoe(5, 6, 7, 8)], [nechetkoe(5, 6, 7, 8), nechetkoe(10, 11, 12, 13)]]
-situation = nechetkoe(2, 3, 4, 7)
-x, y = situation.combine_rules(rules, 0.05)
-fig = px.scatter(x=x, y=y)
-fig.show()
-print(situation.mass_center(x, y, 0.05))
