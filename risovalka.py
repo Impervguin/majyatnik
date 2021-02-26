@@ -1,7 +1,7 @@
 import plotly.express as px
-from clas import nechetkoe as nech
-rules = [[nech(1, 2, 3, 4),nech(1, 2, 3, 4), nech(1, 2, 3, 4)], [nech(5.5, 6, 7, 8),nech(5.5, 6, 7, 8),nech(3, 4, 5, 6)], [nech(3,4,5,6),nech(3,4,5,6),nech(5, 8, 9, 10)]]
-situation = [nech(3,4,5,6), nech(3,4,5,6)]
-x, y = nech.combine_rules(situation, rules, 0.005)
+from Fuzzy_number_class import fuzzy
+rules = [[fuzzy(1, 2, 3, 4),fuzzy(1, 2, 3, 4), fuzzy(1, 2, 3, 4)], [fuzzy(5.5, 6, 7, 8),fuzzy(5.5, 6, 7, 8),fuzzy(3, 4, 5, 6)], [fuzzy(3,4,5,6),fuzzy(3,4,5,6),fuzzy(5, 8, 9, 10)]]
+situation = [fuzzy(3,4,5,6), fuzzy(3,4,5,6)]
+x, y = fuzzy.combine_rules(situation, rules, 0.005)
 fig = px.scatter(x=x, y=y)
 fig.show()

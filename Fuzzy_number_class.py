@@ -1,5 +1,4 @@
-import plotly.express as px
-class nechetkoe():
+class fuzzy():
     def __init__(self, a, b, c, d):
         self.a = a
         self.b = b
