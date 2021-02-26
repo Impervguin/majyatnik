@@ -36,15 +36,16 @@ class nechetkoe():
                     return 1
             start += step
         return maxperesech
-
-    def combine_rules(self, rules, step):
+    @staticmethod
+    def combine_rules(situation, rules, step):
         x = []
         result = []
         start = 0
-        end = max(rules, key=lambda f: f[1].d)[1].d + 2
+        end = max(rules, key=lambda f: f[-1].d)[-1].d + 2
         while start <= end:
             x.append(start)
-            result.append(max([i[1].obrez_y(start, i[0].peresech(self)) for i in rules]))
+            result.append(
+                max([i[-1].obrez_y(start, min([i[j].peresech(situation[j]) for j in range(len(i) - 1)])) for i in rules]))
             start += step
         return x, result
 
